@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: evadoc
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: https://ppauth.unrn.edu.ar/realms/rectorado-dev
+          jwk-set-uri: https://ppauth.unrn.edu.ar/realms/rectorado-dev/protocol/openid-connect/certs
+      client:
+        registration:
+          keycloak:
+            authorization-grant-type: client_credentials
+            client-id: evadoc-backend
+            client-secret: 8NSAvtogbnta0TnmeyZ05BgmvnCSGirs
+        provider:
+          keycloak:
+            token-uri: https://ppauth.unrn.edu.ar/realms/rectorado-dev/protocol/openid-connect/token
+  datasource:
+    url: jdbc:mysql://localhost/evadoc?serverTimezone=America/Buenos_Aires&createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+    open-in-view: false
+    database: default
+  springdoc:
+    oauth2:
+      authorization-url: "https://ppauth.unrn.edu.ar/realms/rectorado-dev/protocol/openid-connect/auth"
+    api-docs:
+      enabled: true
+    swagger-ui:
+      path: "/swagger-ui.html"
+      oauth:
+        client-id: evadoc-backend
+        realm: rectorado-dev
+springdoc:
+  oauth2:
+    authorization-url: "https://ppauth.unrn.edu.ar/realms/rectorado-dev/protocol/openid-connect/auth"
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: "swagger-ui.html"
+    oauth:
+      client-id: evadoc-backend
+      realm: rectorado-dev
+keycloak:
+  auth-server-url: https://ppauth.unrn.edu.ar
+server:
+  servlet:
+    context-path: ${SERVER_SERVLET_CONTEXT_PATH:/api/v1}
+keycloak-evadoc-groups-id:
+  default: cd850c09-2610-4400-a862-fa22b6f774e2
+
